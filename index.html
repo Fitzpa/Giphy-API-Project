@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Giphy Api Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
       button,
       div,
@@ -26,13 +27,12 @@
 
   <body>
     <div class="container">
-      <div id="main-container">
+      <div id="main-container"></div>
         <h1>Anime Gifs!</h1>
         <!-- Gif buttons will get rendered here -->
         <div id="buttons-view"></div>
         <form id="gif-form">
-          <label for="gif-input">Add an anime!</label>
-          <input type="text" id="gif-input" /><br />
+          <input type="text" id="gif-input" placeholder="Add an anime!"/><br />
 
           <!-- Button triggers new gif to be added -->
           <input id="add-gif" type="submit" value="Submit!" />

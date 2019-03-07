@@ -1,24 +1,28 @@
-
 html {
+  font-size: 16px;
   height: 100%;
 }
 
 body {
-  background: #06beb6;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #48b1bf, #06beb6);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #48b1bf, #06beb6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #06beb6;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #48b1bf, #06beb6);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #48b1bf, #06beb6);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   font-family: 'Roboto', sans-serif;
   height: 100%;
 }
 
-div #gifs-view, div #gifs-viewPG, div #gifs-viewPG-13 {
+#gifs-view, #gifs-viewPG, #gifs-viewPG-13 {
   text-align: center;
+  justify-items: center;
   justify-content: center;
-  font-size: 1.5em;
+  font-size: 2.3em;
   text-decoration: underline;
 }
 
-div #container{
+#container {
   height: 100%;
   display: flex;
   align-items: center;
@@ -37,11 +41,11 @@ label {
   text-decoration: underline;
 }
 
-input #gif-input {
-  text-align: center;
+#gif-input {
+  margin: 10px 0;
 }
 
-form #gif-form{
+form #gif-form {
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -49,14 +53,14 @@ form #gif-form{
   display: inline-flex;
 }
 
-div #buttons-view {
+#buttons-view {
   justify-items: space-around;
-  
 }
 
-div #main-container {
+#main-container {
+  display: flex;
   justify-items: center;
-  width: 85%;
+  width: 100%;
   align-items: center;
 }
 
@@ -81,8 +85,8 @@ div #main-container {
 }
 
 #add-gif {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
+  justify-content: flex-end;
   text-transform: uppercase;
   outline: none;
   border: none;
@@ -90,6 +94,7 @@ div #main-container {
   background-color: #FF3030;
   box-shadow: 0 6px #5f5f5e;
 }
+
 #add-gif:hover {
   box-shadow: 0 4px #5f5f5e;
   top: 2px;
@@ -100,17 +105,69 @@ div #main-container {
   top: 6px;
 }
 
-@media only screen and (max-width: 480px) {
-  div #main-container {
-    
-    width: 100%;
-    
-  }
-  div .container {
-    width: 100%;
-  }
+/*mobile styles*/
 
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 32px;
+  }
+  body {
+    width: 100%;
+  }
+  #main-container {
+    width: 100%;
+    margin: 0;
+  }
+  h1 {
+    font-size: 5em;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height: .8em;
+  }
+  .container {
+    width: 100%;
+    margin: 0;
+  }
+  div {
+    margin: 0;
+    width: 100%;
+  }
+  .animeGif {
+    justify-content: center;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    flex-shrink: 1;
+    max-width: 100%;
+  }
+  .gif-btn {
+    justify-content: center;
+    font-size: 1.1em;
+    padding: 0.1em .3em;
+    margin: 0.2em 0.1em;
+  }
   #add-gif {
     font-size: 2em;
+    padding: 0.2em 1em;
+    justify-content: center;
+  }
+  input {
+    margin: .1em 0;
+    width: 95%;
+    justify-content: center;
+  }
+  input #gif-input {
+    box-sizing: border-box;
+    padding: 2em 0;
+    height: 2em;
+  }
+  #gifs-view, #gifs-viewPG, #gifs-viewPG-13 {
+    text-align: center;
+    justify-content: center;
+    font-size: 1.4em;
+    text-decoration: underline;
+    margin: 0.5em 0;
+    width: 100%;
   }
 }
