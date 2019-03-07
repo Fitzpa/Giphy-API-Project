@@ -17,85 +17,108 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700|VT323"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <div class="container">
-      <h1>Giphy Gifs!</h1>
-      <!-- Gif buttons will get rendered here -->
-      <div id="buttons-view"></div>
-      <form id="gif-form">
-        <label for="gif-input">Add an animal!</label>
-        <input type="text" id="gif-input" /><br />
+      <div id="main-container">
+        <h1>Anime Gifs!</h1>
+        <!-- Gif buttons will get rendered here -->
+        <div id="buttons-view"></div>
+        <form id="gif-form">
+          <label for="gif-input">Add an anime!</label>
+          <input type="text" id="gif-input" /><br />
 
-        <!-- Button triggers new gif to be added -->
-        <input id="add-gif" type="submit" value="Submit!" />
-      </form>
+          <!-- Button triggers new gif to be added -->
+          <input id="add-gif" type="submit" value="Submit!" />
+        </form>
+      </div>
+
       <!-- Gifs will get dumped here -->
-      <div id="gifs-view"></div>
+      <div id="gifs-view">G:</div>
+      <div id="gifs-viewPG">PG:</div>
+      <div id="gifs-viewPG-13">PG-13:</div>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script type="text/javascript">
         // Initial array of Gifs
-        var gifsArray = ['hamster', 'gecko', 'meerkat'];
+        var gifsArray = ["One Punch Man", "Naruto", "Hunter X Hunter"];
         const inputField = document.querySelector("#gif-input");
-        var apikey = "&api_key=Hsdutux0jTW6ks8DiqK1TeacMKaXNcxk";
-        var url = "http://api.giphy.com/v1/gifs/search?q=";
+        var apikey = "&api_key=Hsdutux0jTW6ks8DiqK1TeacMKaXNcxk&limit=10";
+        var url = "https://api.giphy.com/v1/gifs/search?q=";
 
         function displayGif() {
           var gif = $(this).attr("data-name");
           console.log(gif);
           var queryURL = url + gif + apikey;
           console.log(queryURL);
-          // Creates AJAX call for the specific movie button being clicked
+          // Creates AJAX call for the specific gif button being clicked
           $.ajax({
             url: queryURL,
             method: "GET"
           }).then(function(response) {
-            var gifDiv = $("<div class='gif'>");
+            var gifDivG = $("<div class='gif'>");
+            var gifDivPG = $("<div class='gif'>");
+            var gifDivPG13 = $("<div class='gif'>");
 
             result = response.data;
             console.log(result);
 
             for (var i = 0; i < result.length; i++) {
+              const gifStillUrl = result[i].images.original_still.url;
               const gifUrl = result[i].images.original.url;
-              console.log(result[i].images.original.url);
-              var image = $("<img>").attr("src", gifUrl);
-              gifDiv.append(image);
-              $("#gifs-view").prepend(gifDiv);
+              console.log(result[i].rating);
+              var image = $("<img class= 'still-image'>");
+
+              image.attr("src", gifStillUrl);
+              image.attr("data-still", gifStillUrl);
+              image.attr("alt", "Still frame of anime gif");
+              image.attr("data-gif", gifUrl);
+              image.attr("class", "animeGif");
+              image.attr("data-index", i);
+
+              if (result[i].rating === "g") {
+                gifDivG.append(image);
+              } else if (result[i].rating === "pg") {
+                gifDivPG.append(image);
+              } else {
+                gifDivPG13.append(image);
+              }
+
+              $("#gifs-view").append(gifDivG);
+              $("#gifs-viewPG").append(gifDivPG);
+              $("#gifs-viewPG-13").append(gifDivPG13);
             }
           });
         }
 
-
-
-
-        // Function for displaying movie data
+        // Function for displaying gif buttons
         function renderButtons() {
-          // Deleting the movie buttons prior to adding new movie buttons
+          // Deleting the gif buttons prior to adding new gif buttons
           // (this is necessary otherwise we will have repeat buttons)
           $("#buttons-view").empty();
 
           // Looping through the array of movies
           for (var i = 0; i < gifsArray.length; i++) {
-            // Then dynamicaly generating buttons for each movie in the array.
+            // Then dynamicaly generating buttons for each gif in the array.
             // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
             var a = $("<button>");
             // Adding a class
             a.addClass("gif-btn");
-            // Adding a data-attribute with a value of the movie at index i
+            // Adding a data-attribute with a value of the gif at index i
 
             a.attr("data-name", gifsArray[i]);
-            // Providing the button's text with a value of the movie at index i
+            // Providing the button's text with a value of the gif at index i
             a.text(gifsArray[i]);
             // Adding the button to the HTML
             $("#buttons-view").append(a);
           }
         }
-
-
 
         // This function handles events where one button is clicked
         $("#add-gif").on("click", function(event) {
@@ -104,20 +127,39 @@
           event.preventDefault();
 
           // This line will grab the text from the input box
-          var gif = $("#gif-input").val().trim();
-          // The gif from the textbox is then added to our array
+          var gif = $("#gif-input")
+            .val()
+            .trim();
           gifsArray.push(gif);
 
-          // calling renderButtons which handles the processing of our movie array
+          // calling renderButtons 
           renderButtons();
         });
 
-      
         $(document).on("click", ".gif-btn", displayGif);
-        // Calling the renderButtons function at least once to display the initial list of movies
+        
         renderButtons();
 
-        
+        $(document).on("click", ".animeGif", function(event) {
+         //This code changes the src from a moving gif to a still of the gif
+         // making it look like play/pause functionality.
+          var currentIn = $(this).attr("data-index");
+          var moving = $(this).attr("data-gif");
+          var still = $(this).attr("data-still");
+          console.log("before");
+          if ($(this).attr("src") === moving) 
+          {
+            // assigning the current gif's 'src' attribute to the still image
+            $(this).attr("src", still);
+            console.log("still");
+          } else 
+          {
+            // assigning the current gif's 'src' attribute to the moving gif
+            $(this).attr("src", moving);
+            console.log("moving");
+          }
+          console.log("after");
+        });
       </script>
     </div>
   </body>
