@@ -66,6 +66,7 @@ form #gif-form {
 
 .gif-btn {
   justify-content: space-around;
+  background-color: #00fff2;
   outline: none;
   border: none;
   border-radius: 10px;
