@@ -46,13 +46,12 @@ form #gif-form{
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 290px;
   display: inline-flex;
 }
 
 div #buttons-view {
-  justify-items: center;
-  align-items: center;
+  justify-items: space-around;
+  
 }
 
 div #main-container {
@@ -62,6 +61,7 @@ div #main-container {
 }
 
 .gif-btn {
+  justify-content: space-around;
   outline: none;
   border: none;
   border-radius: 10px;
@@ -81,7 +81,8 @@ div #main-container {
 }
 
 #add-gif {
-  
+  display: flex;
+  justify-content: center;
   text-transform: uppercase;
   outline: none;
   border: none;
@@ -97,4 +98,19 @@ div #main-container {
 #add-gif:active {
   box-shadow: 0 0 #5f5f5e;
   top: 6px;
+}
+
+@media only screen and (max-width: 480px) {
+  div #main-container {
+    
+    width: 100%;
+    
+  }
+  div .container {
+    width: 100%;
+  }
+
+  #add-gif {
+    font-size: 2em;
+  }
 }

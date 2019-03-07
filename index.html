@@ -40,19 +40,27 @@
       </div>
 
       <!-- Gifs will get dumped here -->
-      <div id="gifs-view">G:</div>
-      <div id="gifs-viewPG">PG:</div>
-      <div id="gifs-viewPG-13">PG-13:</div>
+      <div id="gifs-view"></div>
+      <div id="gifs-viewPG"></div>
+      <div id="gifs-viewPG-13"></div>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script type="text/javascript">
         // Initial array of Gifs
-        var gifsArray = ["One Punch Man", "Naruto", "Hunter X Hunter"];
+        var gifsArray = ["One Punch Man", "My Hero Academia", "Black Clover", "Hunter X Hunter", "Archer", "Pokemon", "Dragon Ball Z"];
         const inputField = document.querySelector("#gif-input");
         var apikey = "&api_key=Hsdutux0jTW6ks8DiqK1TeacMKaXNcxk&limit=10";
         var url = "https://api.giphy.com/v1/gifs/search?q=";
-
+        // function for displaying all the gifs in the chosen div
         function displayGif() {
+          $("#gifs-view").empty();
+          $("#gifs-viewPG").empty();
+          $("#gifs-viewPG-13").empty();
+
+          $("#gifs-view").append("G:");
+          $("#gifs-viewPG").append("PG:");
+          $("#gifs-viewPG-13").append("PG-13:");
+
           var gif = $(this).attr("data-name");
           console.log(gif);
           var queryURL = url + gif + apikey;
@@ -132,28 +140,26 @@
             .trim();
           gifsArray.push(gif);
 
-          // calling renderButtons 
+          // calling renderButtons
           renderButtons();
         });
 
         $(document).on("click", ".gif-btn", displayGif);
-        
+
         renderButtons();
 
         $(document).on("click", ".animeGif", function(event) {
-         //This code changes the src from a moving gif to a still of the gif
-         // making it look like play/pause functionality.
+          //This code changes the src from a moving gif to a still of the gif
+          // making it look like play/pause functionality.
           var currentIn = $(this).attr("data-index");
           var moving = $(this).attr("data-gif");
           var still = $(this).attr("data-still");
           console.log("before");
-          if ($(this).attr("src") === moving) 
-          {
+          if ($(this).attr("src") === moving) {
             // assigning the current gif's 'src' attribute to the still image
             $(this).attr("src", still);
             console.log("still");
-          } else 
-          {
+          } else {
             // assigning the current gif's 'src' attribute to the moving gif
             $(this).attr("src", moving);
             console.log("moving");
