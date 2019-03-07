@@ -1,0 +1,48 @@
+
+body {
+  background: #06beb6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #48b1bf, #06beb6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #48b1bf, #06beb6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: 'Roboto', sans-serif;
+}
+
+label {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.gif-btn {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 0.2em .7em;
+  margin: 0.2em 0.2em;
+  box-shadow: 0 6px #5f5f5e;
+}
+
+.gif-btn:hover {
+  box-shadow: 0 4px #5f5f5e;
+  top: 2px;
+}
+
+.gif-btn:active {
+  box-shadow: 0 0 #5f5f5e;
+  top: 6px;
+}
+
+#add-gif {
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  background-color: #FF3030;
+  box-shadow: 0 6px #5f5f5e;
+}
+#add-gif:hover {
+  box-shadow: 0 4px #5f5f5e;
+  top: 2px;
+}
+
+#add-gif:active {
+  box-shadow: 0 0 #5f5f5e;
+  top: 6px;
+}
